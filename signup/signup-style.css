@@ -1,0 +1,184 @@
+/* auth-style.css — for login & signup pages */
+
+/* ===============================
+   GLOBAL / BASE
+   ==============================*/
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root{
+  --primary-color: #2c3e50;
+  --secondary-color: #34495e;
+  --accent-color-1: #3498db;
+  --accent-color-2: #e74c3c;
+  --accent-color-3: #2ecc71;
+  --bg-start: #a1c4fd;
+  --bg-end: #c2e9fb;
+  --card-bg: rgba(255,255,255,0.26);
+  --border-color: rgba(255,255,255,0.28);
+  --text-color: #2c3e50;
+  --muted: #7f8c8d;
+}
+
+/* Fill viewport and center container */
+html,body{
+  height:100%;
+}
+
+body {
+  font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(120deg, var(--bg-start), var(--bg-end));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* ===============================
+   OUTER CONTAINER (keeps same HTML)
+   ==============================*/
+.container {
+  width: 100%;
+  min-height: 100vh;               /* full height so centering works */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+}
+
+/* ===============================
+   FORM BOX (used by your HTML .form-box)
+   ==============================*/
+.form-box {
+  width: 100%;
+  max-width: 420px;
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 36px 34px;
+  box-shadow: 0 10px 34px rgba(31,38,135,0.08);
+  border: 1px solid var(--border-color);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;            /* center children horizontally */
+  gap: 14px;                      /* consistent vertical spacing */
+}
+
+/* Header */
+.form-box h2{
+  color: var(--primary-color);
+  font-size: 1.45rem;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  color: var(--secondary-color);
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+/* ===============================
+   FORM (inputs / button)
+   ==============================*/
+form#loginForm,
+form#signupForm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;                      /* spacing between stacked groups */
+  align-items: center;
+}
+
+/* make each field constrained and centered */
+.form-field {
+  width: 100%;
+  max-width: 320px;               /* consistent input width */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Inputs fill the form-field width */
+.form-box input[type="text"],
+.form-box input[type="email"],
+.form-box input[type="password"] {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(189,195,199,0.5);
+  background: rgba(255,255,255,0.9);
+  font-size: 1rem;
+  transition: box-shadow .18s ease, border-color .18s ease;
+  color: var(--text-color);
+  outline: none;
+}
+
+/* Extra vertical breathing room between inputs */
+.form-box input + input,
+.form-box input + .form-field,
+.form-field + .form-field {
+  margin-top: 10px;
+}
+
+/* Focus state */
+.form-box input:focus {
+  border-color: var(--accent-color-1);
+  box-shadow: 0 6px 18px rgba(52,152,219,0.12);
+}
+
+/* Button — same width as inputs */
+.form-box button,
+.form-box .btn-primary {
+  width: 100%;
+  max-width: 320px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent-color-1), var(--accent-color-3));
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(52,152,219,0.12);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.form-box button:hover,
+.form-box .btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(52,152,219,0.16);
+}
+
+/* Signup/Login helper text */
+.signup-text,
+.switch-text {
+  font-size: 0.95rem;
+  color: var(--secondary-color);
+  margin-top: 6px;
+}
+
+/* link style */
+.signup-text a,
+.switch-text a {
+  color: var(--accent-color-1);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.signup-text a:hover,
+.switch-text a:hover { text-decoration: underline; }
+
+/* Small screens */
+@media (max-width: 520px) {
+  .form-box {
+    padding: 26px;
+    max-width: 92%;
+  }
+
+  .form-box input,
+  .form-box button {
+    max-width: 100%;
+  }
+}

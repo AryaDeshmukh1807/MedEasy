@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MedEasy | Medications</title>
+  <link rel="stylesheet" href="medications-style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="glass-header">
+    <div class="header-container">
+      <div class="logo">
+        <i data-lucide="pill" class="logo-icon"></i>
+        <h1>MedEasy</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="../index/index.html"><i data-lucide="layout-dashboard"></i> Dashboard</a></li>
+          <li><a href="../medication/medications.html" class="active"><i data-lucide="pill"></i> Medications</a></li>
+          <li><a href="../upload/upload-report.html"><i data-lucide="upload-cloud"></i> Reports</a></li>
+          <li><a href="../login/login.html" id="logoutBtn"><i data-lucide="log-out"></i> Logout</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero fade-in">
+    <div class="hero-content">
+      <h1>💊 Manage Your Medications</h1>
+      <p>Track, review, and manage all your medicines in one place.</p>
+    </div>
+  </section>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="main-container fade-in">
+    <section class="add-medication-section glass-card">
+      <h2>Add a New Medication</h2>
+      <form id="medForm" class="med-form">
+        <input type="text" id="medName" placeholder="Medicine Name" required />
+        <input type="text" id="dosage" placeholder="Dosage (e.g. 500mg)" required />
+        <button type="submit" class="btn-primary">
+          <i data-lucide="save" class="btn-icon"></i> Save
+        </button>
+      </form>
+    </section>
+
+    <section class="med-list-section glass-card">
+      <h2>Your Saved Medications</h2>
+      <div id="medList" class="med-list">
+        <p class="empty-msg">No medications added yet.</p>
+      </div>
+    </section>
+
+    <section class="med-info-section glass-card">
+      <h2>Medicine Details</h2>
+      <div id="medInfo" class="med-info-card">
+        <p>Select a medicine to view its details.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="glass-footer">
+    <div class="footer-container">
+      <p>&copy; 2025 MedEasy. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="medications-script.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

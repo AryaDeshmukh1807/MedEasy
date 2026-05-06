@@ -1,0 +1,202 @@
+/* ===============================
+   GLOBAL VARIABLES
+=============================== */
+:root {
+  --primary-color: #2c3e50;
+  --secondary-color: #34495e;
+  --accent-color-1: #3498db;
+  --accent-color-2: #e74c3c;
+  --accent-color-3: #2ecc71;
+  --text-color: #2c3e50;
+  --card-bg: rgba(255, 255, 255, 0.25);
+  --border-color: rgba(255, 255, 255, 0.3);
+  --subtle-text: #7f8c8d;
+}
+
+/* ===============================
+   BASE STYLES
+=============================== */
+* { box-sizing: border-box; }
+
+body {
+  font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(120deg, #a1c4fd, #c2e9fb);
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-color);
+}
+
+/* ===============================
+   AUTH CONTAINER
+=============================== */
+.auth-container {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border-radius: 18px;
+  padding: 40px 40px;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.08);
+  text-align: center;
+  width: 100%;
+  max-width: 420px;
+  animation: fadeIn 0.8s ease;
+  border: 1px solid var(--border-color);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;           /* <-- center children horizontally */
+  gap: 10px;
+}
+
+.auth-container:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* ===============================
+   LOGO HEADER
+=============================== */
+/* LOGO — gradient text fallback + heartbeat for icon/svg */
+
+
+/* ===============================
+   TEXT & HEADINGS
+=============================== */
+h2 {
+  color: var(--primary-color);
+  margin: 6px 0 0 0;
+  font-size: 1.45rem;
+}
+
+.subtitle {
+  color: var(--secondary-color);
+  font-size: 0.95rem;
+  margin: 6px 0 16px 0;
+}
+
+/* ===============================
+   FORM - centered layout
+=============================== */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  align-items: center;           /* <-- center all form children */
+}
+
+/* make labels + inputs centered and constrained width */
+.form-group {
+  width: 100%;
+  max-width: 320px;
+  text-align: center;            /* <-- center label text */
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0 auto;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--secondary-color);
+  font-size: 0.95rem;
+  display: block;
+}
+
+/* inputs centered visually and constrained */
+input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.72);
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  margin: 0 auto;                /* keep block centered */
+  box-shadow: none;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--accent-color-1);
+  box-shadow: 0 0 8px rgba(52, 152, 219, 0.18);
+}
+
+/* keep buttons same width as inputs and centered */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  color: white;
+  background: linear-gradient(135deg, #3498db, #2ecc71);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+  max-width: 320px;
+  margin-top: 6px;
+  box-shadow: 0 6px 18px rgba(52, 152, 219, 0.12);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(52, 152, 219, 0.18);
+}
+
+/* ===============================
+   SIGNUP TEXT
+=============================== */
+.switch-text {
+  margin-top: 12px;
+  font-size: 0.95rem;
+  color: var(--secondary-color);
+  text-align: center;
+}
+
+.switch-text a {
+  color: var(--accent-color-1);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.switch-text a:hover {
+  text-decoration: underline;
+}
+
+/* ===============================
+   SMALL SCREEN / RESPONSIVE
+=============================== */
+@media (max-width: 500px) {
+  .auth-container {
+    padding: 28px 20px;
+    max-width: 92%;
+  }
+
+  .form-group {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .btn-primary {
+    max-width: 100%;
+  }
+
+  h2 { font-size: 1.25rem; }
+}
+
+/* ===============================
+   ANIMATIONS
+=============================== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

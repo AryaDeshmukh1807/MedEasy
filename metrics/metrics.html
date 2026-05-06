@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Metrics | MedEase</title>
+  <link rel="stylesheet" href="metrics-style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <h1 class="logo">📊 MedEase Health Dashboard</h1>
+      <nav>
+        <a href="../index/index.html">Home</a>
+        <a href="../medication/medications.html">Medications</a>
+        <a href="../login/login.html">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="form-section">
+      <h2>Enter Your Health Metrics</h2>
+      <form id="metricsForm">
+        <input type="number" id="bloodSugar" placeholder="Blood Sugar (mg/dL)" required>
+        <input type="number" id="systolicBP" placeholder="Systolic BP" required>
+        <input type="number" id="diastolicBP" placeholder="Diastolic BP" required>
+        <input type="number" id="heartRate" placeholder="Heart Rate (bpm)" required>
+        <input type="number" id="weight" placeholder="Weight (kg)">
+        <button type="submit">💾 Save Metrics</button>
+      </form>
+    </section>
+
+    <section class="chart-section">
+      <h2>Your Health Overview</h2>
+      <canvas id="metricsChart"></canvas>
+      <div id="insights" class="insight-box"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 MedEase | AI-powered health tracking</p>
+  </footer>
+
+  <script src="metrics-script.js"></script>
+</body>
+</html>

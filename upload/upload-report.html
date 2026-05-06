@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upload Reports | MedEasy</title>
+
+  <!-- ===== STYLES ===== -->
+  <link rel="stylesheet" href="upload-style.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+  <!-- ===== HEADER ===== -->
+  <header class="glass-header">
+    <div class="container header-content">
+      <div class="logo">
+        <i data-lucide="heartbeat" class="logo-icon"></i>
+        <h1>MedEasy</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="../index/index.html"><i data-lucide="layout-dashboard"></i> Dashboard</a></li>
+          <li><a href="../medication/medications.html"><i data-lucide="pill"></i> Medications</a></li>
+          <li><a href="../upload/upload-report.html" class="active"><i data-lucide="upload-cloud"></i> Reports</a></li>
+          <li><a href="../login/login.html" id="logoutBtn"><i data-lucide="log-out"></i> Logout</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main>
+    <!-- ===== UPLOAD SECTION ===== -->
+    <section class="upload-section glass-card">
+      <h2><i data-lucide="upload-cloud"></i> Upload New Medical Report</h2>
+
+      <form id="uploadForm" class="upload-form">
+        <div class="form-group">
+          <label for="reportTitle">Report Title</label>
+          <input
+            type="text"
+            id="reportTitle"
+            required
+            placeholder="e.g., Blood Test - Jan 2025"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="reportFile">Select File</label>
+
+          <!-- Custom File Input -->
+          <label for="reportFile" class="file-label">
+            <i data-lucide="file-up"></i> Choose File
+          </label>
+          <input
+            type="file"
+            id="reportFile"
+            accept=".pdf, .jpg, .jpeg, .png"
+            required
+          />
+          <p id="fileName" class="file-name">No file selected</p>
+        </div>
+
+        <div class="form-group">
+          <label for="reportNotes">Notes (optional)</label>
+          <textarea
+            id="reportNotes"
+            rows="3"
+            placeholder="Add any notes about this report..."
+          ></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary">
+          <i data-lucide="upload"></i> Upload Report
+        </button>
+      </form>
+
+      <div id="uploadStatus" class="alert-box"></div>
+    </section>
+
+    <!-- ===== REPORTS SECTION ===== -->
+    <section class="report-list glass-card">
+      <div class="report-header">
+        <h2><i data-lucide="file-text"></i> Your Uploaded Reports</h2>
+        <button id="cleanupReports" class="btn-secondary">
+          <i data-lucide="broom"></i> Clean Missing Reports
+        </button>
+      </div>
+
+      <div id="reportContainer" class="report-grid">
+        <p class="empty-msg">No reports uploaded yet.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="glass-footer">
+    <div class="container">
+      <p>&copy; 2025 MedEasy. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script src="upload-script.js"></script>
+  <script>
+    lucide.createIcons();
+
+    // Show selected file name beside "Choose File"
+    const fileInput = document.getElementById("reportFile");
+    const fileNameText = document.getElementById("fileName");
+
+    fileInput.addEventListener("change", () => {
+      const file = fileInput.files[0];
+      fileNameText.textContent = file ? `📄 ${file.name}` : "No file selected";
+    });
+  </script>
+</body>
+</html>

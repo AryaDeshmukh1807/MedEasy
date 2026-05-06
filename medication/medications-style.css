@@ -1,0 +1,367 @@
+/* ============================================================
+   🌈 GLOBAL THEME — matches index page
+============================================================ */
+:root {
+  --primary-color: #2c3e50;
+  --secondary-color: #34495e;
+  --accent-color-1: #3498db;
+  --accent-color-2: #e74c3c;
+  --accent-color-3: #2ecc71;
+  --background-color: #ecf0f1;
+  --card-bg: #ffffff;
+  --text-color: #2c3e50;
+  --subtle-text: #7f8c8d;
+  --border-color: #bdc3c7;
+  --alert-success: #2ecc71;
+  --alert-warning: #f1c40f;
+  --alert-danger: #e74c3c;
+}
+
+/* ============================================================
+   🧭 GLOBAL RESET & BASE
+============================================================ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(120deg, #a1c4fd, #c2e9fb);
+  background-attachment: fixed;
+  color: var(--text-color);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ============================================================
+   🧭 HEADER & NAVIGATION
+============================================================ */
+header {
+  background-color: var(--card-bg);
+  padding: 15px 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+
+.header-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo h1 {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: var(--secondary-color);
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: var(--accent-color-1);
+  background-color: rgba(52, 152, 219, 0.1);
+}
+
+nav ul li a.active {
+  background-color: var(--accent-color-1);
+  color: white;
+}
+
+/* ============================================================
+   🌤 HERO SECTION
+============================================================ */
+.hero {
+  text-align: center;
+  padding: 100px 20px 60px;
+  color: var(--primary-color);
+}
+
+.hero-content h1 {
+  font-size: 2.4rem;
+  margin-bottom: 10px;
+}
+
+.hero-content p {
+  color: var(--secondary-color);
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}
+
+/* ============================================================
+   💊 MAIN CONTENT CONTAINER
+============================================================ */
+.main-container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* ============================================================
+   🧊 GLASS CARD (Common Style)
+============================================================ */
+.glass-card {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+h2 {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+/* ============================================================
+   ➕ ADD MEDICATION FORM
+============================================================ */
+.med-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.med-form input {
+  flex: 1;
+  min-width: 220px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.med-form input:focus {
+  border-color: var(--accent-color-1);
+  box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+  outline: none;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #fff;
+  background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%);
+  box-shadow: 0 6px 18px rgba(52, 152, 219, 0.2);
+  transition: all 0.25s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(52, 152, 219, 0.3);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+/* ============================================================
+   💊 MEDICATION LIST
+============================================================ */
+.med-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.med-card {
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(12px);
+  border-radius: 14px;
+  padding: 20px 24px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.med-card.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.med-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(52, 152, 219, 0.2);
+}
+
+.med-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  justify-content: flex-end;
+}
+
+.view-btn,
+.delete-btn {
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.view-btn {
+  background: rgba(52, 152, 219, 0.15);
+  color: var(--primary-color);
+}
+
+.view-btn:hover {
+  background: var(--accent-color-1);
+  color: white;
+}
+
+.delete-btn {
+  background: rgba(231, 76, 60, 0.1);
+  color: var(--secondary-color);
+}
+
+.delete-btn:hover {
+  background: var(--accent-color-2);
+  color: white;
+}
+
+/* ============================================================
+   📋 MEDICINE DETAILS
+============================================================ */
+.med-info-card {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(12px);
+  padding: 25px;
+  border-radius: 12px;
+  line-height: 1.7;
+  color: var(--secondary-color);
+  text-align: left;
+}
+
+.med-info-card h3 {
+  color: var(--primary-color);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+/* ============================================================
+   🦶 FOOTER — matches index page with better spacing
+============================================================ */
+.glass-footer {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  padding: 35px 0; /* ⬆️ Increased padding for visual balance */
+  color: var(--secondary-color);
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 60px; /* ⬆️ Adds gap between last content and footer */
+}
+
+/* 🧩 Responsive adjustment */
+@media (max-width: 768px) {
+  .glass-footer {
+    margin-top: 40px; /* slightly smaller gap on mobile */
+    padding: 28px 0;
+  }
+}
+
+
+/* ============================================================
+   ✨ ANIMATIONS
+============================================================ */
+.fade-in {
+  animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   📱 RESPONSIVE DESIGN
+============================================================ */
+@media (max-width: 768px) {
+  .med-form {
+    flex-direction: column;
+  }
+
+  .btn-primary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-content h1 {
+    font-size: 1.8rem;
+  }
+
+  nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .glass-card {
+    padding: 20px;
+  }
+}

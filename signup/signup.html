@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signup | MedEasy</title>
+
+  <!-- ===== FONTS & ICONS ===== -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- ===== CSS ===== -->
+  <link rel="stylesheet" href="signup-style.css" />
+</head>
+
+<body>
+  <div class="auth-container">
+    <div class="form-box">
+      <div class="logo">
+        <i data-lucide="heartbeat" class="logo-icon"></i>
+        <h1>MedEasy</h1>
+      </div>
+
+      <h2>Create Account ✨</h2>
+      <p class="subtitle">Join MedEasy today and manage your health easily</p>
+
+      <form id="signupForm">
+        <input type="text" id="name" placeholder="Full Name" required />
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="password" id="password" placeholder="Password" required />
+
+        <button type="submit" class="btn-primary">Sign Up</button>
+      </form>
+
+      <p class="signup-text">
+        Already have an account? <a href="../login/login.html">Login</a>
+      </p>
+    </div>
+  </div>
+
+  <script src="signup-script.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

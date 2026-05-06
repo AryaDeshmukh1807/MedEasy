@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MedEasy | Your Health Dashboard</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Chart.js & Lucide Icons -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+  <!-- ===== HEADER ===== -->
+  <header class="glass-header">
+    <div class="container header-content">
+      <div class="logo">
+        <!-- ✅ Unified pill logo for all pages -->
+        <i data-lucide="pill" class="logo-icon"></i>
+        <h1>MedEasy</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html" class="active"><i data-lucide="layout-dashboard"></i> Dashboard</a></li>
+          <li><a href="../medication/medications.html"><i data-lucide="pill"></i> Medications</a></li>
+          <li><a href="../upload/upload-report.html"><i data-lucide="upload-cloud"></i> Reports</a></li>
+          <li><a href="../login/login.html" id="logoutBtn"><i data-lucide="log-out"></i> Logout</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== HERO SECTION ===== -->
+  <section class="hero fade-in">
+    <div class="hero-content">
+      <h1>Welcome back, <span id="userName">User</span> 👋</h1>
+      <p>Track your health metrics, manage medications, and visualize your progress — all in one place.</p>
+      <button id="addMetricsBtn" class="btn-primary">
+        <i data-lucide="plus-circle" class="btn-icon"></i> Add Metrics
+      </button>
+    </div>
+  </section>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="container fade-in">
+
+    <!-- ===== DASHBOARD SECTION ===== -->
+    <section class="dashboard-section glass-card">
+      <h2>Your Key Health Metrics</h2>
+
+      <!-- ✅ Insights box -->
+      <div class="insights-box" id="insightsBox">
+        <h3>🩺 Current Health Insights</h3>
+        <p>Analyzing your recent health data...</p>
+      </div>
+
+      <div class="card-container">
+        <div class="metric-card">
+          <i data-lucide="activity" class="metric-icon"></i>
+          <h3>Blood Pressure</h3>
+          <p class="metric-value" id="bpValue">--/--</p>
+        </div>
+
+        <div class="metric-card">
+          <i data-lucide="droplet" class="metric-icon"></i>
+          <h3>Blood Glucose</h3>
+          <p class="metric-value" id="glucoseValue">--</p>
+        </div>
+
+        <div class="metric-card">
+          <i data-lucide="heart-pulse" class="metric-icon"></i>
+          <h3>Heart Rate</h3>
+          <p class="metric-value" id="hrValue">--</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== HEALTH INSIGHTS SECTION ===== -->
+    <section class="analytics glass-card">
+      <h2>Health Trends & Visualizations</h2>
+
+      <div class="chart-grid">
+        <div class="chart-container">
+          <h3><i data-lucide="droplet" class="chart-icon"></i> Blood Glucose Trends</h3>
+          <canvas id="glucoseChart"></canvas>
+        </div>
+
+        <div class="chart-container">
+          <h3><i data-lucide="activity" class="chart-icon"></i> Blood Pressure Trends</h3>
+          <canvas id="bpChart"></canvas>
+        </div>
+
+        <div class="chart-container">
+          <h3><i data-lucide="heart-pulse" class="chart-icon"></i> Heart Rate Trends</h3>
+          <canvas id="hrChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT SECTION ===== -->
+    <section class="about glass-section fade-in">
+      <h2>About MedEasy</h2>
+      <p>
+        MedEasy simplifies healthcare management. Visualize your data, track progress, and take control of your health journey with powerful insights and analytics.
+      </p>
+
+      <div class="about-cards">
+        <div class="about-card">
+          <i data-lucide="brain-circuit" class="about-icon"></i>
+          <h3>Smart Insights</h3>
+          <p>AI-driven analytics that turn your metrics into personalized recommendations.</p>
+        </div>
+
+        <div class="about-card">
+          <i data-lucide="bar-chart-3" class="about-icon"></i>
+          <h3>Visual Analytics</h3>
+          <p>Understand your health better through clear and interactive charts.</p>
+        </div>
+
+        <div class="about-card">
+          <i data-lucide="shield-check" class="about-icon"></i>
+          <h3>Secure Data</h3>
+          <p>Your data is encrypted and stored safely — your privacy is our priority.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="glass-footer">
+    <div class="container">
+      <p>&copy; 2025 <strong>MedEasy</strong>. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ===== ADD METRICS MODAL ===== -->
+  <div id="metricsModal" class="modal-overlay">
+    <div class="modal-content glass-card">
+      <h2>Add Health Metrics</h2>
+      <form id="metricsForm">
+        <div class="form-group">
+          <label for="bloodSugar">Blood Sugar (mg/dL)</label>
+          <input type="number" id="bloodSugar" required />
+        </div>
+        <div class="form-group">
+          <label for="systolic">Systolic BP (mmHg)</label>
+          <input type="number" id="systolic" required />
+        </div>
+        <div class="form-group">
+          <label for="diastolic">Diastolic BP (mmHg)</label>
+          <input type="number" id="diastolic" required />
+        </div>
+        <div class="form-group">
+          <label for="heartRate">Heart Rate (bpm)</label>
+          <input type="number" id="heartRate" required />
+        </div>
+        <div class="form-group">
+          <label for="weight">Weight (kg)</label>
+          <input type="number" id="weight" required />
+        </div>
+        <div class="modal-buttons">
+          <button type="submit" class="btn-primary">
+            <i data-lucide="check-circle" class="btn-icon"></i> Save
+          </button>
+          <button type="button" id="closeModal" class="btn-secondary">
+            <i data-lucide="x-circle"></i> Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script src="script.js"></script>
+  <script>
+    lucide.createIcons(); // ✅ Initialize Lucide icons
+  </script>
+</body>
+</html>
