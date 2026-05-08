@@ -1,6 +1,3 @@
-// ✅ One place to change your backend URL
-const API_BASE = "https://medeasy-backend.onrender.com";
-
 document.addEventListener('DOMContentLoaded', async () => {
   console.log("✅ MedEase Dashboard Loaded");
 
@@ -19,7 +16,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       userNameElement.textContent = storedName;
     } else {
       try {
-        const res = await fetch(`${API_BASE}/api/profile`, {   // ✅ fixed
+        const res = await fetch('http://localhost:5001/api/profile', {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
@@ -44,15 +41,16 @@ document.addEventListener('DOMContentLoaded', async () => {
   // ===================== FETCH DATA FROM DB =====================
   async function fetchMetrics() {
     try {
-      const res = await fetch(`${API_BASE}/api/metrics`, {   // ✅ fixed
+      const res = await fetch('http://localhost:5001/api/metrics', {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await res.json();
 
       if (res.ok && data.length > 0) {
         data.forEach(item => {
+          // Format date nicely (MM/DD)
           const dateObj = new Date(item.date);
-          const formattedDate = `${dateObj.getMonth() + 1}/${dateObj.getDate()}`;
+          const formattedDate = `${dateObj.getMonth() + 1}/${dateObj.getDate()}`; 
           
           userData.metrics.dates.push(formattedDate);
           userData.metrics.bloodGlucose.push(item.bloodSugar || null);
@@ -61,6 +59,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           userData.metrics.heartRate.push(item.heartRate || null);
         });
 
+        // Update the top summary cards with the most recent entry
         const lastEntry = data[data.length - 1];
         userData.currentValues.bp = `${lastEntry.systolicBP || '--'}/${lastEntry.diastolicBP || '--'} mmHg`;
         userData.currentValues.glucose = `${lastEntry.bloodSugar || '--'} mg/dL`;
@@ -71,8 +70,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
+  // 🚨 WAIT for the database to return the data before doing UI work
   await fetchMetrics();
 
+  // Safely update top metric cards (Only if they exist on the current page)
   const bpEl = document.getElementById('bpValue');
   const glucoseEl = document.getElementById('glucoseValue');
   const hrEl = document.getElementById('hrValue');
@@ -98,7 +99,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           pointBackgroundColor: color,
           tension: 0.3,
           fill: true,
-          spanGaps: true
+          spanGaps: true // ✅ Allows the line to connect across missing PDF data
         }],
       },
       options: {
@@ -141,7 +142,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const insightsBox = document.getElementById('insightsBox');
 
   const updateInsights = () => {
-    if (!insightsBox) return;
+    if (!insightsBox) return; // Skip if on upload page
 
     const validGlucose = userData.metrics.bloodGlucose.filter(v => v !== null).slice(-3);
     const validBpSys = userData.metrics.bloodPressureSys.filter(v => v !== null).slice(-3);
@@ -182,7 +183,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const weight = parseFloat(document.getElementById('weight').value) || null;
 
       try {
-        const res = await fetch(`${API_BASE}/api/metrics`, {   // ✅ fixed
+        const res = await fetch('http://localhost:5001/api/metrics', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
           body: JSON.stringify({ bloodSugar, systolicBP, diastolicBP, heartRate, weight }),
@@ -194,10 +195,12 @@ document.addEventListener('DOMContentLoaded', async () => {
           modal.classList.remove('active');
           metricsForm.reset();
 
+          // Update displayed text metrics at top
           if (bpEl) bpEl.textContent = `${systolicBP || '--'}/${diastolicBP || '--'} mmHg`;
           if (glucoseEl) glucoseEl.textContent = `${bloodSugar || '--'} mg/dL`;
           if (hrEl) hrEl.textContent = `${heartRate || '--'} bpm`;
 
+          // Add data to chart arrays
           const todayObj = new Date();
           const todayFormatted = `${todayObj.getMonth() + 1}/${todayObj.getDate()}`;
           
@@ -207,9 +210,23 @@ document.addEventListener('DOMContentLoaded', async () => {
           userData.metrics.bloodPressureDia.push(diastolicBP);
           userData.metrics.heartRate.push(heartRate);
 
-          if (glucoseChart) { glucoseChart.data.labels = userData.metrics.dates; glucoseChart.data.datasets[0].data = userData.metrics.bloodGlucose; glucoseChart.update('active'); }
-          if (bpChart) { bpChart.data.labels = userData.metrics.dates; bpChart.data.datasets[0].data = userData.metrics.bloodPressureSys; bpChart.data.datasets[1].data = userData.metrics.bloodPressureDia; bpChart.update('active'); }
-          if (hrChart) { hrChart.data.labels = userData.metrics.dates; hrChart.data.datasets[0].data = userData.metrics.heartRate; hrChart.update('active'); }
+          // Update charts dynamically
+          if (glucoseChart) {
+            glucoseChart.data.labels = userData.metrics.dates;
+            glucoseChart.data.datasets[0].data = userData.metrics.bloodGlucose;
+            glucoseChart.update('active');
+          }
+          if (bpChart) {
+            bpChart.data.labels = userData.metrics.dates;
+            bpChart.data.datasets[0].data = userData.metrics.bloodPressureSys;
+            bpChart.data.datasets[1].data = userData.metrics.bloodPressureDia;
+            bpChart.update('active');
+          }
+          if (hrChart) {
+            hrChart.data.labels = userData.metrics.dates;
+            hrChart.data.datasets[0].data = userData.metrics.heartRate;
+            hrChart.update('active');
+          }
 
           updateInsights();
         } else {
@@ -223,14 +240,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   // ===================== PDF UPLOAD LOGIC =====================
-  const uploadForm = document.getElementById('uploadForm') || document.getElementById('reportUploadForm');
+  // Supports multiple ID variations depending on what you used in upload-report.html
+  const uploadForm = document.getElementById('uploadForm') || document.getElementById('reportUploadForm'); 
 
   if (uploadForm) {
     uploadForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       
       const formData = new FormData();
-      const fileField = document.getElementById('reportFileInput') || document.getElementById('reportFile') || document.querySelector('input[type="file"]');
+      const fileField = document.getElementById('reportFileInput') || document.getElementById('reportFile') || document.querySelector('input[type="file"]'); 
       
       if (!fileField || !fileField.files[0]) {
         alert("Please select a PDF file to upload.");
@@ -239,6 +257,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       formData.append('reportFile', fileField.files[0]);
 
+      // Change button text to show loading state
       const submitBtn = uploadForm.querySelector('button[type="submit"]');
       const originalText = submitBtn ? submitBtn.innerHTML : "Upload";
       if (submitBtn) {
@@ -247,9 +266,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
 
       try {
-        const res = await fetch(`${API_BASE}/api/reports/upload`, {   // ✅ fixed
+        const res = await fetch('http://localhost:5001/api/reports/upload', {
           method: 'POST',
-          headers: { Authorization: `Bearer ${token}` },
+          headers: { Authorization: `Bearer ${token}` }, // Do NOT set Content-Type for FormData
           body: formData
         });
 
@@ -258,6 +277,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (res.ok) {
           alert("✅ Analysis Complete!");
           
+          // Show extraction details and warnings
           if (data.extraction) {
             console.log("📊 Extraction Method:", data.extraction.method);
             console.log("📈 Metrics Found:", data.extraction.metricsFound);
@@ -267,7 +287,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             alert("ℹ️ " + data.warning);
           }
           
+          // Check if we are currently on the dashboard page
           if (document.getElementById('glucoseChart')) {
+             // We are on the dashboard: Live Update
              userData.metrics = { dates: [], bloodGlucose: [], bloodPressureSys: [], bloodPressureDia: [], heartRate: [] };
              await fetchMetrics();
              
@@ -282,12 +304,15 @@ document.addEventListener('DOMContentLoaded', async () => {
              updateInsights();
              uploadForm.reset();
           } else {
-             window.location.href = '../index/index.html';
+             // We are on the separate Upload page: Redirect to Dashboard!
+             window.location.href = '../index/index.html'; 
           }
 
         } else {
           alert("⚠️ Analysis failed: " + (data.message || "Unknown error"));
-          if (data.error) console.error("ErrorDetails:", data.error);
+          if (data.error) {
+            console.error("ErrorDetails:", data.error);
+          }
         }
       } catch (err) {
         console.error("❌ Upload error:", err);

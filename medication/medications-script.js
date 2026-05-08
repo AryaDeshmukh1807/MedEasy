@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const medList = document.getElementById("medList");
   const medInfo = document.getElementById("medInfo");
 
-  const API_BASE = "https://medeasy-backend.onrender.com";
+  const API_BASE = "http://localhost:5001";
   const token = localStorage.getItem("token");
 
   if (!token) {

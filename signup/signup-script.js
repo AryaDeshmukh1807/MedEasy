@@ -1,5 +1,3 @@
-const API_BASE = "https://medeasy-backend.onrender.com"; // ✅ Render backend URL
-
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("signupForm");
   const messageBox = document.createElement("p");
@@ -20,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      const res = await fetch(`${API_BASE}/api/auth/register`, {  // ✅ fixed
+      const res = await fetch("http://localhost:5001/api/auth/register",{
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
