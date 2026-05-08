@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const fileLabel = document.querySelector('.file-label');
   const fileNameEl = document.querySelector('.file-name');
 
-  const API_BASE = "http://localhost:5000";
+  const API_BASE = "https://medeasy-backend.onrender.com"; // ✅ Render backend URL
   const token = localStorage.getItem("token");
 
   // immediate check

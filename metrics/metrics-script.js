@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const insightsBox = document.getElementById("insights");
   const ctx = document.getElementById("metricsChart").getContext("2d");
 
-  const API_BASE = "http://localhost:5000";
+  const API_BASE = "https://medelasy-backend.onrender.com";
   let chart;
 
   async function loadMetrics() {

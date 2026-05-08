@@ -1,3 +1,6 @@
+// ✅ Set your Render backend URL here — change this once and it works everywhere
+const API_BASE = "https://medeasy-backend.onrender.com";
+
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -5,7 +8,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
   const password = document.getElementById("password").value;
 
   try {
-    const res = await fetch("http://localhost:5000/api/auth/login", {
+    const res = await fetch(`${API_BASE}/api/auth/login`, {  // ✅ updated
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
@@ -15,7 +18,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     if (res.ok) {
       alert("Login successful!");
       localStorage.setItem("token", data.token);
-      window.location.href = "../index/index.html"; // redirect to dashboard
+      window.location.href = "../index/index.html";
     } else {
       alert(data.message);
     }
